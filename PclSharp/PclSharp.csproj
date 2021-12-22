@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3795CB2E-FF81-4C7D-99C8-0589B7F1385D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PclSharp</RootNamespace>
+    <AssemblyName>PclSharp</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\..\bin\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>2</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\..\bin\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\portable-net45+win8+wp8+wpa81\System.Numerics.Vectors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.4.0\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\ModelCoefficients.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelCoefficients.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Common\PCA.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PCA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Common\PCAOfXYZ.generated.cs">
+      <DependentUpon>PCA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Eigen\Vector3i.cs" />
+    <Compile Include="Eigen\Matrix4.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Matrix4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Eigen\VectorXf.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VectorXf.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Feature.cs" />
+    <Compile Include="Features\FPFHEstimation.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FPFHEstimation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Features\FPFHEstimationOfPointXYZAndNormal.generated.cs">
+      <DependentUpon>FPFHEstimation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Features\IntegralImageNormalEstimation.cs" />
+    <Compile Include="Features\IntegralImageNormalEstimationOfPointXYZAndNormal.generated.cs">
+      <DependentUpon>IntegralImageNormalEstimation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\ExtractIndicesOfXYZ.generated.cs">
+      <DependentUpon>ExtractIndices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\Filter.cs" />
+    <Compile Include="Filters\ExtractIndices.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExtractIndices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\FilterIndices.cs" />
+    <Compile Include="Filters\Heightmap2D.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Heightmap2D.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\HeightMap2DOfXYZ.generated.cs">
+      <DependentUpon>Heightmap2D.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\StatisticalOutlierRemoval.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StatisticalOutlierRemoval.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\StatisticalOutlierRemovalOfXYZ.generated.cs">
+      <DependentUpon>StatisticalOutlierRemoval.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\VoxelGrid.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VoxelGrid.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\VoxelGridOfXYZ.generated.cs">
+      <DependentUpon>VoxelGrid.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IO\OBJReader.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OBJReader.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IO\PCDReader.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PCDReader.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IO\PCDWriter.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PCDWriter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IO\PLYReader.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PLYReader.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IO\PLYWriter.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PLYWriter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Native.cs" />
+    <Compile Include="PclBase.cs" />
+    <Compile Include="PclBaseOfXYZ.generated.cs">
+      <DependentUpon>PclBaseOf.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PclBaseOfXYZRGBA.generated.cs">
+      <DependentUpon>PclBaseOf.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PointCloud.cs" />
+    <Compile Include="PointCloudOfNormal.generated.cs">
+      <DependentUpon>PointCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PointCloudOfXYZ.generated.cs">
+      <DependentUpon>PointCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PointCloudOfXYZL.generated.cs">
+      <DependentUpon>PointCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PointCloudOfXYZRGBA.generated.cs">
+      <DependentUpon>PointCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PointIndices.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PointIndices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PolygonMesh.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PolygonMesh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registration\ICP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ICP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Registration\IterativeClosestPointOfPointXYZ_PointXYZ.generated.cs">
+      <DependentUpon>ICP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Registration\Registration.cs" />
+    <Compile Include="Registration\TransformationEstimation.cs" />
+    <Compile Include="Registration\TransformationEstimationPointToPlaneLLS.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransformationEstimationPointToPlaneLLS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Registration\TransformationEstimationPointToPlaneLLSOfPointNormal_PointNormal.generated.cs">
+      <DependentUpon>TransformationEstimationPointToPlaneLLS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SampleConsensus\SampleConsensusModel.cs" />
+    <Compile Include="SampleConsensus\SampleConsensusModelPlaneOfXYZ.generated.cs">
+      <DependentUpon>SampleConsensusModelPlane.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SampleConsensus\SampleConsensusModelPlane.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleConsensusModelPlane.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Search\KdTree.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KdTree.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Search\KdTreeOfXYZ.generated.cs">
+      <DependentUpon>KdTree.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Search\OrganizedNeighbor.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrganizedNeighbor.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Search\OrganizedNeighborOfXYZ.generated.cs">
+      <DependentUpon>OrganizedNeighbor.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Search\Search.cs" />
+    <Compile Include="Segmentation\CPCSegmentation.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CPCSegmentation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\CPCSegmentationOfXYZ.generated.cs">
+      <DependentUpon>CPCSegmentation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\EuclideanClusterExtraction.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EuclideanClusterExtraction.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\EuclideanClusterExtractionOfXYZ.generated.cs">
+      <DependentUpon>EuclideanClusterExtraction.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\LCCPSegmentation.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LCCPSegmentation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\LCCPSegmentationOfXYZ.generated.cs">
+      <DependentUpon>LCCPSegmentation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\SACSegmentation.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SACSegmentation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\SACSegmentationOfXYZ.generated.cs">
+      <DependentUpon>SACSegmentation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\Supervoxel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Supervoxel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\SupervoxelClustering.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupervoxelClustering.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\SupervoxelClusteringOfXYZ.generated.cs">
+      <DependentUpon>SupervoxelClustering.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\SupervoxelClusteringOfXYZRGBA.generated.cs">
+      <DependentUpon>SupervoxelClustering.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\SupervoxelClusters.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupervoxelClusters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\SupervoxelClustersOfXYZ.generated.cs">
+      <DependentUpon>SupervoxelClusters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\SupervoxelClustersOfXYZRGBA.generated.cs">
+      <DependentUpon>SupervoxelClusters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\SupervoxelOfXYZ.generated.cs">
+      <DependentUpon>Supervoxel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\SupervoxelOfXYZRGBA.generated.cs">
+      <DependentUpon>Supervoxel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\MultiMap.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MultiMap.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\MultiMapOfuintAnduint.generated.cs">
+      <DependentUpon>MultiMap.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\VectorOfByte.generated.cs">
+      <DependentUpon>VectorOfStruct.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\VectorOfFloat.generated.cs">
+      <DependentUpon>VectorOfStruct.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\VectorOfInt.generated.cs">
+      <DependentUpon>VectorOfStruct.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\VectorOfNormal.generated.cs">
+      <DependentUpon>VectorOfStruct.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\VectorOfPointIndices.generated.cs">
+      <DependentUpon>VectorOfUnmanaged.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\VectorOfStruct.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VectorOfStruct.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\VectorOfUInt.generated.cs">
+      <DependentUpon>VectorOfStruct.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\VectorOfUnmanaged.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VectorOfUnmanaged.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\VectorOfXYZ.generated.cs">
+      <DependentUpon>VectorOfStruct.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\VectorOfXYZL.generated.cs">
+      <DependentUpon>VectorOfStruct.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\VectorOfXYZRGBA.generated.cs">
+      <DependentUpon>VectorOfStruct.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Struct\PointTypes.cs" />
+    <Compile Include="Struct\Features.cs" />
+    <Compile Include="Surface\ConvexHull.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConvexHull.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Surface\ConvexHullOfXYZ.generated.cs">
+      <DependentUpon>ConvexHull.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Surface\MeshConstruction.cs" />
+    <Compile Include="Surface\SurfaceBase.cs" />
+    <Compile Include="UnmanagedObject.cs" />
+    <Compile Include="Utils\LibraryLoader.cs" />
+    <Compile Include="Utils\PointSizes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="InvokeTemplate.ttinclude" />
+    <None Include="Manager.ttinclude" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common\ModelCoefficients.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelCoefficients.cs</LastGenOutput>
+    </Content>
+    <Content Include="Common\PCA.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PCA.cs</LastGenOutput>
+    </Content>
+    <Content Include="Eigen\Matrix4.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Matrix4.cs</LastGenOutput>
+    </Content>
+    <Content Include="Eigen\VectorXf.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>VectorXf.cs</LastGenOutput>
+    </Content>
+    <Content Include="Features\FPFHEstimation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FPFHEstimation.cs</LastGenOutput>
+    </Content>
+    <Content Include="Features\IntegralImageNormalEstimation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IntegralImageNormalEstimation.txt</LastGenOutput>
+    </Content>
+    <Content Include="Features\IntegralImageNormalEstimation.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IntegralImageNormalEstimation.tt</DependentUpon>
+    </Content>
+    <Content Include="Filters\ExtractIndices.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ExtractIndices.cs</LastGenOutput>
+    </Content>
+    <Content Include="Filters\Heightmap2D.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Heightmap2D.cs</LastGenOutput>
+    </Content>
+    <Content Include="Filters\StatisticalOutlierRemoval.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>StatisticalOutlierRemoval.cs</LastGenOutput>
+    </Content>
+    <Content Include="Filters\VoxelGrid.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>VoxelGrid.cs</LastGenOutput>
+    </Content>
+    <Content Include="IO\OBJReader.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OBJReader.cs</LastGenOutput>
+    </Content>
+    <Content Include="IO\PCDReader.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PCDReader.cs</LastGenOutput>
+    </Content>
+    <Content Include="IO\PCDWriter.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PCDWriter.cs</LastGenOutput>
+    </Content>
+    <Content Include="IO\PLYReader.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PLYReader.cs</LastGenOutput>
+    </Content>
+    <Content Include="IO\PLYWriter.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PLYWriter.cs</LastGenOutput>
+    </Content>
+    <Content Include="PclBaseOf.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PclBaseOf.txt</LastGenOutput>
+    </Content>
+    <Content Include="PclBaseOf.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PclBaseOf.tt</DependentUpon>
+    </Content>
+    <Content Include="PointCloud.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PointCloud.txt</LastGenOutput>
+    </Content>
+    <Content Include="PointCloud.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PointCloud.tt</DependentUpon>
+    </Content>
+    <Content Include="PointIndices.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PointIndices.cs</LastGenOutput>
+    </Content>
+    <Content Include="PolygonMesh.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PolygonMesh.cs</LastGenOutput>
+    </Content>
+    <Content Include="Registration\ICP.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ICP.cs</LastGenOutput>
+    </Content>
+    <Content Include="Registration\TransformationEstimationPointToPlaneLLS.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TransformationEstimationPointToPlaneLLS.cs</LastGenOutput>
+    </Content>
+    <Content Include="SampleConsensus\SampleConsensusModelPlane.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SampleConsensusModelPlane.cs</LastGenOutput>
+    </Content>
+    <Content Include="Search\KdTree.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>KdTree.cs</LastGenOutput>
+    </Content>
+    <Content Include="Search\OrganizedNeighbor.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OrganizedNeighbor.cs</LastGenOutput>
+    </Content>
+    <Content Include="Segmentation\CPCSegmentation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CPCSegmentation.cs</LastGenOutput>
+    </Content>
+    <Content Include="Segmentation\EuclideanClusterExtraction.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EuclideanClusterExtraction.cs</LastGenOutput>
+    </Content>
+    <Content Include="Segmentation\LCCPSegmentation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LCCPSegmentation.cs</LastGenOutput>
+    </Content>
+    <Content Include="Segmentation\SACSegmentation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SACSegmentation.cs</LastGenOutput>
+    </Content>
+    <Content Include="Segmentation\Supervoxel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Supervoxel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Segmentation\SupervoxelClustering.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SupervoxelClustering.cs</LastGenOutput>
+    </Content>
+    <Content Include="Segmentation\SupervoxelClusters.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SupervoxelClusters.cs</LastGenOutput>
+    </Content>
+    <Content Include="Std\MultiMap.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MultiMap.cs</LastGenOutput>
+    </Content>
+    <Content Include="Std\VectorOfStruct.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>VectorOfStruct.cs</LastGenOutput>
+    </Content>
+    <Content Include="Std\VectorOfUnmanaged.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>VectorOfUnmanaged.cs</LastGenOutput>
+    </Content>
+    <Content Include="Surface\ConvexHull.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ConvexHull.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
