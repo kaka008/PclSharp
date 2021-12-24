@@ -28,8 +28,8 @@ namespace PclSharp.IO
 		<#= i.Ctor() #>
 		<#= i.Delete() #>
 
-		<#= i.FuncI("int", "write_xyz", "string fileName, IntPtr cloud, int offset") #>
-		<#= i.FuncI("int", "write_xyzrgba", "string fileName, IntPtr cloud, int offset") #>
+		<#= i.FuncI("int", "write_xyz", "string fileName, IntPtr cloud, bool binary") #>
+		<#= i.FuncI("int", "write_xyzrgba", "string fileName, IntPtr cloud, bool binary") #>
 	}
 
 	public class PCDWriter : UnmanagedObject
@@ -39,15 +39,15 @@ namespace PclSharp.IO
 			_ptr = <#=i.Invoke("ctor")#>;
 		}
 
-		public int Write(string fileName, PointCloud<PointXYZ> cloud, int indices=0)
+		public int Write(string fileName, PointCloud<PointXYZ> cloud, bool binary=false)
 		{
-			var res = <#=i.InvokeI("write_xyz", "fileName, cloud.Ptr, indices")#>;
+			var res = <#=i.InvokeI("write_xyz", "fileName, cloud.Ptr, binary")#>;
 			return res;
 		}
 
-		public int Write(string fileName, PointCloud<PointXYZRGBA> cloud, int indices=0)
+		public int Write(string fileName, PointCloud<PointXYZRGBA> cloud, bool binary=false)
 		{
-			return <#=i.InvokeI("write_xyzrgba", "fileName, cloud, indices")#>;
+			return <#=i.InvokeI("write_xyzrgba", "fileName, cloud, binary")#>;
 		}
 
 		protected override void DisposeObject()
@@ -83,13 +83,13 @@ extern "C" {
 	*ptr = NULL;
 }
 
-<#=i.ExportI("int32_t", "write_xyz", "const char* str, PointCloud<PointXYZ>* cloud, int* indices")#>
+<#=i.ExportI("int32_t", "write_xyz", "const char* str, PointCloud<PointXYZ>* cloud, bool binary")#>
 {
-	return ptr->write(string(str), *cloud, *indices);
+	return ptr->write(string(str), *cloud, binary);
 }
-<#=i.ExportI("int32_t", "write_xyzrgba", "const char* str, PointCloud<PointXYZRGBA>* cloud, int* indices")#>
+<#=i.ExportI("int32_t", "write_xyzrgba", "const char* str, PointCloud<PointXYZRGBA>* cloud, bool binary")#>
 { 
-	return ptr->write(string(str), *cloud, *indices);
+	return ptr->write(string(str), *cloud, binary);
 }
 
 

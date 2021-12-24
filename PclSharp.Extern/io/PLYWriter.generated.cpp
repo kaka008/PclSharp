@@ -21,13 +21,13 @@ EXPORT(void) io_plywriter_delete(PLYWriter** ptr)
 	*ptr = NULL;
 }
 
-EXPORT(int32_t) io_plywriter_write_xyz(PLYWriter* ptr, const char* str, PointCloud<PointXYZ>* cloud, int* indices)
+EXPORT(int32_t) io_plywriter_write_xyz(PLYWriter* ptr, const char* str, PointCloud<PointXYZ>* cloud, bool binary)
 {
-	return ptr->write(string(str), *cloud, *indices);
+	return ptr->write(string(str), *cloud, binary);
 }
-EXPORT(int32_t) io_plywriter_write_xyzrgba(PLYWriter* ptr, const char* str, PointCloud<PointXYZRGBA>* cloud, int* indices)
+EXPORT(int32_t) io_plywriter_write_xyzrgba(PLYWriter* ptr, const char* str, PointCloud<PointXYZRGBA>* cloud, bool binary)
 { 
-	return ptr->write(string(str), *cloud, *indices);
+	return ptr->write(string(str), *cloud, binary);
 }
 
 

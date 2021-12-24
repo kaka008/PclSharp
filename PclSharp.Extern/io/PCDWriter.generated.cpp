@@ -21,13 +21,13 @@ EXPORT(void) io_pcdwriter_delete(PCDWriter** ptr)
 	*ptr = NULL;
 }
 
-EXPORT(int32_t) io_pcdwriter_write_xyz(PCDWriter* ptr, const char* str, PointCloud<PointXYZ>* cloud, int* indices)
+EXPORT(int32_t) io_pcdwriter_write_xyz(PCDWriter* ptr, const char* str, PointCloud<PointXYZ>* cloud, bool binary)
 {
-	return ptr->write(string(str), *cloud, *indices);
+	return ptr->write(string(str), *cloud, binary);
 }
-EXPORT(int32_t) io_pcdwriter_write_xyzrgba(PCDWriter* ptr, const char* str, PointCloud<PointXYZRGBA>* cloud, int* indices)
+EXPORT(int32_t) io_pcdwriter_write_xyzrgba(PCDWriter* ptr, const char* str, PointCloud<PointXYZRGBA>* cloud, bool binary)
 { 
-	return ptr->write(string(str), *cloud, *indices);
+	return ptr->write(string(str), *cloud, binary);
 }
 
 

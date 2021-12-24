@@ -28,7 +28,7 @@ namespace PclSharp
 
             var tptr = @this.Data;
             var optr = other.Data;
-            for(var i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
                 (optr + i)->V = (tptr + i)->V;
         }
 
