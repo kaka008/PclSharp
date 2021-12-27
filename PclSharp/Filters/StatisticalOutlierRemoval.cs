@@ -7,3 +7,4 @@ namespace PclSharp.Filters
 		public abstract double StdDevMulThresh { get; set; }
 	}
 }
+
