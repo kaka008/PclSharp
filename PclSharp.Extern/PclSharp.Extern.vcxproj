@@ -127,11 +127,7 @@
     <ClInclude Include="filters\HeightMap2D.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="io\OBJReader.generated.cpp" />
-    <ClCompile Include="io\PCDReader.generated.cpp" />
-    <ClCompile Include="io\PCDWriter.generated.cpp" />
-    <ClCompile Include="io\PLYReader.generated.cpp" />
-    <ClCompile Include="io\PLYWriter.generated.cpp" />
+    <ClCompile Include="io\*.cpp" />
     <ClCompile Include="PointSizes.cpp" />
     <ClCompile Include="common\*.cpp" />
     <ClCompile Include="eigen\*.cpp" />

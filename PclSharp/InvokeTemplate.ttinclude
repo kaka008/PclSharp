@@ -25,6 +25,7 @@ class InvokeT : IDisposable
 	}
 
 	private string def = "[DllImport(Native.DllName, CallingConvention=Native.CallingConvention)]\r\n		public static extern";
+	private string def_str = "[DllImport(Native.DllName)]\r\n	    [return:MarshalAs(UnmanagedType.BStr)] \r\n        public static extern";
 	private string _ = "_";
 	private string funcPrefix;
 	private string csClass;
@@ -99,6 +100,14 @@ class InvokeT : IDisposable
 		ReplaceVars(ref ret);
 		_funcs.Add(name);
 		return string.Format("{0} {1} {2}{3}{4}(IntPtr ptr{5});", def, ret, funcPrefix, _, name, parms);
+	}
+	public string FuncStr(string ret, string name, string parms)
+	{
+		InstanceParms(ref parms);
+		ReplaceVars(ref parms);
+		ReplaceVars(ref ret);
+		_funcs.Add(name);
+		return string.Format("{0} {1} {2}{3}{4}(IntPtr ptr{5});", def_str, ret, funcPrefix, _, name, parms);
 	}
 
 	public string Prop(string name, string type)

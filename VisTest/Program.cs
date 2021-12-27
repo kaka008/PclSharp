@@ -1,4 +1,5 @@
 ﻿using PclSharp;
+using PclSharp.Filters;
 using PclSharp.IO;
 using PclSharp.Vis;
 using System;
@@ -18,30 +19,67 @@ namespace VisTest
             {
                 //using (var reader = new PCDReader())
                 //    reader.Read(@"E:\other\PclSharp\data\tutorials\table_scene_mug_stereo_textured.pcd", cloud);
-                using (var reader = new PLYReader())
-                    reader.Read(@"E:\vision\VisionMasterVision\src\Hatch3DVision\bin\x64\Debug\Output\Project1\job2\202111_25_15_57_18.ply", cloud);
+                using (var reader = new PCDReader())
+                    reader.Read(@"C:\Users\l4420\Desktop\myply.pcd", cloud);
+              // writerTest(cloud);
+               filterTest(cloud);
 
-                using (var writer = new PCDWriter())
-                {
 
-                    writer.Write(@"C:\Users\l4420\desktop\myply.pcd", cloud,false);
+            }
+        }
+        /// <summary>
+        /// 测试写文件
+        /// </summary>
+        /// <param name="cloud"></param>
+        private static void writerTest(PointCloudOfXYZ cloud)
+        {
 
-                }
-                //for(int i=0; i<cloud.Count;i++)
-                //{
-                //    Console.WriteLine($"x:{cloud.Points[i].X} y:{cloud.Points[i].Y} z:{cloud.Points[i].Z}");
-                //}
+            using (var writer = new PCDWriter())
+            {
 
-                using (var visualizer = new Visualizer("a window"))
-                {
-                    visualizer.AddPointCloud(cloud);
-                    visualizer.SetPointCloudRenderingProperties(RenderingProperties.PointSize, 2);
-                    visualizer.SetPointCloudRenderingProperties(RenderingProperties.Opacity, 1);
-                    visualizer.SetBackgroundColor(0, 0, 55);
-                    while (!visualizer.WasStopped)
-                        visualizer.SpinOnce(100);
-                }
+                writer.Write(@"c:\users\l4420\desktop\myply.pcd", cloud, true);
 
+            }
+            for (int i = 0; i < cloud.Count; i++)
+            {
+                Console.WriteLine($"x:{cloud.Points[i].X} y:{cloud.Points[i].Y} z:{cloud.Points[i].Z}");
+            }
+        }
+
+        private static void filterTest(PointCloudOfXYZ cloud)
+        {
+            using (var filter = new PassthroughOfXYZ())
+            {
+                PointCloudOfXYZ cloudFiltered = new PointCloudOfXYZ();
+                filter.SetInputCloud(cloud);
+                filter.SetFilterFieldName("x");
+                Console.WriteLine($"FilterFieldName:{filter.GetFilterFieldName()}");
+                filter.SetFilterLimits(0.0f,120f);
+                filter.FilterLimitsNegative = false;
+                filter.filter(cloudFiltered);
+                filter.SetInputCloud(cloudFiltered);
+                filter.SetFilterFieldName("y");
+                filter.SetFilterLimits(0.0f, 70f);
+                Console.WriteLine($"FilterFieldName:{filter.GetFilterFieldName()}");
+                filter.filter(cloudFiltered);
+                float min=0, max = 0;
+                filter.GetFilterLimits(ref min,ref max);
+                Console.WriteLine($"min:{min},max:{max}");
+                show(cloudFiltered);
+            }
+
+
+        }
+        private static void show(PointCloudOfXYZ cloud)
+        {
+            using (var visualizer = new Visualizer("a window"))
+            {
+                visualizer.AddPointCloud(cloud);
+                visualizer.SetPointCloudRenderingProperties(RenderingProperties.PointSize, 2);
+                visualizer.SetPointCloudRenderingProperties(RenderingProperties.Opacity, 1);
+                visualizer.SetBackgroundColor(0, 0, 55);
+                while (!visualizer.WasStopped)
+                    visualizer.SpinOnce(100);
             }
         }
 

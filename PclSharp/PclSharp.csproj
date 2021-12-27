@@ -129,6 +129,14 @@
     <Compile Include="Filters\HeightMap2DOfXYZ.generated.cs">
       <DependentUpon>Heightmap2D.tt</DependentUpon>
     </Compile>
+    <Compile Include="Filters\PassThrough.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PassThrough.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\PassThroughOfXYZ.generated.cs">
+      <DependentUpon>PassThrough.tt</DependentUpon>
+    </Compile>
     <Compile Include="Filters\StatisticalOutlierRemoval.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -414,6 +422,10 @@
     <Content Include="Filters\Heightmap2D.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Heightmap2D.cs</LastGenOutput>
+    </Content>
+    <Content Include="Filters\PassThrough.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PassThrough.cs</LastGenOutput>
     </Content>
     <Content Include="Filters\StatisticalOutlierRemoval.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
