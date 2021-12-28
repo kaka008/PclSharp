@@ -99,7 +99,14 @@ class InvokeT : IDisposable
 		ReplaceVars(ref parms);
 		ReplaceVars(ref ret);
 		_funcs.Add(name);
-		return string.Format("{0} {1} {2}{3}{4}(IntPtr ptr{5});", def, ret, funcPrefix, _, name, parms);
+		return string.Format("{0} {1} {2}{3}{4}(IntPtr ptr{5});" ,def, ret, funcPrefix, _, name, parms);
+	}
+	public string FuncS(string ret, string name, string parms)
+	{
+		ReplaceVars(ref parms);
+		ReplaceVars(ref ret);
+		_funcs.Add(name);
+		return string.Format("{0} {1} {2}{3}{4}({5});" ,def, ret, funcPrefix, _, name, parms);
 	}
 	public string FuncStr(string ret, string name, string parms)
 	{
@@ -146,6 +153,12 @@ class InvokeT : IDisposable
 		ReplaceVars(ref parms);
 		return string.Format("Invoke.{0}{1}{2}(_ptr{3})", funcPrefix, _, name, parms);
 	}
+	
+	public string InvokeS(string name, string parms)
+	{
+		ReplaceVars(ref parms);
+		return string.Format("Invoke.{0}{1}{2}({3})", funcPrefix, _, name, parms);
+	}
 
 	public string InvokeP(string name, string type)
 	{
@@ -184,6 +197,13 @@ class InvokeT : IDisposable
 		ReplaceVars(ref ret);
 		_funcs.Remove(name);
 		return "EXPORT("+ret+") "+funcPrefix+_+name+"("+cppPrefix+"* ptr"+parms+")";
+	}
+	public string ExportS(string ret, string name, string parms)
+	{
+		ReplaceVars(ref parms);
+		ReplaceVars(ref ret);
+		_funcs.Remove(name);
+		return "EXPORT("+ret+") "+funcPrefix+_+name+"("+parms+")";
 	}
 
 	public string ExportP(string name, string type)
