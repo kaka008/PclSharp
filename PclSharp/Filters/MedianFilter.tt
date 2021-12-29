@@ -118,7 +118,7 @@ using namespace pcl;
 using namespace std;
 
 typedef <#=cppWrapper#> filter_t;
-typedef boost::shared_ptr<PointCloud<<#=cppin#>>> boost_cloud;
+typedef std::shared_ptr<PointCloud<<#=cppin#>>> std_cloud;
 
 #ifdef __cplusplus
 extern "C" {
@@ -142,11 +142,11 @@ extern "C" {
 
 <#=i.ExportI("void", "setInputCloud", "PointCloud<cppin>* cloud")#>
 {
-	ptr->setInputCloud(boost_cloud(boost_cloud(), cloud));
+	ptr->setInputCloud(std_cloud(std_cloud(), cloud));
 }
 <#=i.ExportI("void", "setIndices", "vector<int>* indices")#>
 {
-	ptr->setIndices(boost::shared_ptr<vector<int>>(boost::shared_ptr<vector<int>>(), indices));
+	ptr->setIndices(std::shared_ptr<vector<int>>(std::shared_ptr<vector<int>>(), indices));
 }
 
 <#=i.ExportP("WindowSize", "int")#>

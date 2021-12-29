@@ -8,9 +8,9 @@ using namespace pcl;
 using namespace pcl::registration;
 using namespace std;
 
-typedef boost::shared_ptr<PointCloud<PointXYZ>> boost_src;
-typedef boost::shared_ptr<PointCloud<PointXYZ>> boost_tgt;
-typedef boost::shared_ptr<vector<int>> boost_indices;
+typedef std::shared_ptr<PointCloud<PointXYZ>> std_src;
+typedef std::shared_ptr<PointCloud<PointXYZ>> std_tgt;
+typedef std::shared_ptr<vector<int>> std_indices;
 typedef Eigen::Matrix<float, 4, 4> Matrix4;
 typedef IterativeClosestPoint<PointXYZ, PointXYZ> classType;
 
@@ -58,17 +58,17 @@ EXPORT(double) registration_icp_pointxyz_pointxyz_getEuclideanFitnessEpsilon(Ite
 { return ptr->getEuclideanFitnessEpsilon(); }
 
 EXPORT(void) registration_icp_pointxyz_pointxyz_setInputSource(IterativeClosestPoint<PointXYZ, PointXYZ>* ptr, PointCloud<PointXYZ>* cloud)
-{ ptr->setInputSource(boost_src(boost_src(), cloud)); }
+{ ptr->setInputSource(std_src(std_src(), cloud)); }
 
 EXPORT(PointCloud<PointXYZ>*) registration_icp_pointxyz_pointxyz_getInputSource(IterativeClosestPoint<PointXYZ, PointXYZ>* ptr)
-{ return boost::const_pointer_cast<PointCloud<PointXYZ>>(ptr->getInputSource()).get(); }
+{ return std::const_pointer_cast<PointCloud<PointXYZ>>(ptr->getInputSource()).get(); }
 
 
 EXPORT(void) registration_icp_pointxyz_pointxyz_setInputTarget(IterativeClosestPoint<PointXYZ, PointXYZ>* ptr, PointCloud<PointXYZ>* cloud)
-{ ptr->setInputTarget(boost_tgt(boost_tgt(), cloud)); }
+{ ptr->setInputTarget(std_tgt(std_tgt(), cloud)); }
 
 EXPORT(PointCloud<PointXYZ>*) registration_icp_pointxyz_pointxyz_getInputTarget(IterativeClosestPoint<PointXYZ, PointXYZ>* ptr)
-{ return boost::const_pointer_cast<PointCloud<PointXYZ>>(ptr->getInputTarget()).get(); }
+{ return std::const_pointer_cast<PointCloud<PointXYZ>>(ptr->getInputTarget()).get(); }
 
 #ifdef __cplusplus  
 }

@@ -144,9 +144,9 @@ using namespace pcl;
 using namespace pcl::registration;
 using namespace std;
 
-typedef boost::shared_ptr<PointCloud<<#=cps#>>> boost_src;
-typedef boost::shared_ptr<PointCloud<<#=cpt#>>> boost_tgt;
-typedef boost::shared_ptr<vector<int>> boost_indices;
+typedef std::shared_ptr<PointCloud<<#=cps#>>> std_src;
+typedef std::shared_ptr<PointCloud<<#=cpt#>>> std_tgt;
+typedef std::shared_ptr<vector<int>> std_indices;
 typedef Eigen::Matrix<float, 4, 4> Matrix4;
 typedef <#=cppWrapper#> classType;
 
@@ -176,17 +176,17 @@ extern "C" {
 <#=i.ExportP("EuclideanFitnessEpsilon", "double")#>
 
 <#=i.ExportI("void", "setInputSource", "PointCloud<cps>* cloud")#>
-{ ptr->setInputSource(boost_src(boost_src(), cloud)); }
+{ ptr->setInputSource(std_src(std_src(), cloud)); }
 
 <#=i.ExportI("PointCloud<cps>*", "getInputSource", "")#>
-{ return boost::const_pointer_cast<PointCloud<<#=cps#>>>(ptr->getInputSource()).get(); }
+{ return std::const_pointer_cast<PointCloud<<#=cps#>>>(ptr->getInputSource()).get(); }
 
 
 <#=i.ExportI("void", "setInputTarget", "PointCloud<cpt>* cloud")#>
-{ ptr->setInputTarget(boost_tgt(boost_tgt(), cloud)); }
+{ ptr->setInputTarget(std_tgt(std_tgt(), cloud)); }
 
 <#=i.ExportI("PointCloud<cps>*", "getInputTarget", "")#>
-{ return boost::const_pointer_cast<PointCloud<<#=cpt#>>>(ptr->getInputTarget()).get(); }
+{ return std::const_pointer_cast<PointCloud<<#=cpt#>>>(ptr->getInputTarget()).get(); }
 
 #ifdef __cplusplus  
 }

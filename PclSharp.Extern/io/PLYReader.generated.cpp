@@ -2,6 +2,7 @@
 #pragma once
 #include "..\export.h"
 #include <pcl/io/ply_io.h>
+#include <pcl/point_types.h>
 
 using namespace pcl;
 using namespace std;

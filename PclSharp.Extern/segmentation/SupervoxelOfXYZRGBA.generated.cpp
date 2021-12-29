@@ -8,7 +8,7 @@
 using namespace pcl;
 using namespace std;
 
-typedef boost::shared_ptr<PointCloud<PointXYZRGBA>> boost_cloud;
+typedef std::shared_ptr<PointCloud<PointXYZRGBA>> std_cloud;
 
 #ifdef __cplusplus
 extern "C" {

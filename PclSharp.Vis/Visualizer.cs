@@ -23,7 +23,7 @@ namespace PclSharp.Vis
         [DllImport(Native.DllName, CallingConvention = Native.CallingConvention)]
         public static extern void visualizer_setPointCloudRenderingProperties_1x(IntPtr ptr, int property, double value, string name, int viewport);
         [DllImport(Native.DllName, CallingConvention = Native.CallingConvention)]
-        public static extern void visualizer_addCoordinateSystem(IntPtr ptr, double scale, float x, float y, float z, int viewport);
+        public static extern void visualizer_addCoordinateSystem(IntPtr ptr, double scale, float x, float y, float z,string id, int viewport);
 
         [DllImport(Native.DllName, CallingConvention = Native.CallingConvention)]
         [return: MarshalAs(UnmanagedType.I1)]
@@ -40,7 +40,11 @@ namespace PclSharp.Vis
         [DllImport(Native.DllName, CallingConvention = Native.CallingConvention)]
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool visualizer_addCube(IntPtr ptr, float x_min, float x_max, float y_min, float y_max, float z_min, float z_max, double r = 1.0, double g = 1.0, double b = 1.0, string id = "cube", int viewport = 0);
+        [DllImport(Native.DllName, CallingConvention = Native.CallingConvention)]
+        public static extern void visualizer_setCameraPosition(IntPtr ptr, double pos_x, double pos_y, double pos_z, double up_x, double up_y, double up_z, int viewport = 0);
 
+        [DllImport(Native.DllName, CallingConvention = Native.CallingConvention)]
+        public static extern void visualizer_setCameraPositionWithView(IntPtr ptr, double pos_x, double pos_y, double pos_z, double view_x, double view_y, double view_z, double up_x, double up_y, double up_z, int viewport = 0);
 
         [DllImport(Native.DllName, CallingConvention = Native.CallingConvention)]
         public static extern void visualizer_spin(IntPtr ptr);
@@ -72,9 +76,9 @@ namespace PclSharp.Vis
 
         public void SetPointCloudRenderingProperties(RenderingProperties property, double value, string name = "cloud", int viewport = 0)
             => Invoke.visualizer_setPointCloudRenderingProperties_1x(_ptr, (int)property, value, name, viewport);
-        public void AddCoordinateSystem(double scale = 1.0, float x = 0, float y = 0, float z = 0, int viewport = 0)
+        public void AddCoordinateSystem(double scale = 1.0, float x = 0, float y = 0, float z = 0,string id= "reference", int viewport = 0)
         {
-            Invoke.visualizer_addCoordinateSystem(_ptr, scale, x, y, z, viewport);
+            Invoke.visualizer_addCoordinateSystem(_ptr, scale, x, y, z, id,viewport);
         }
         public bool AddText(String text, int x, int y, int fontsize = 5, double r = 1.0, double g = 1.0, double b = 1.0, String id = "h", int viewport = 0)
         {
@@ -91,6 +95,14 @@ namespace PclSharp.Vis
         public bool AddCube(float x_min, float x_max, float y_min, float y_max, float z_min, float z_max, double r = 1.0, double g = 1.0, double b = 1.0, string id = "cube", int viewport = 0)
         {
             return Invoke.visualizer_addCube(_ptr, x_min, x_max, y_min, y_max, z_min, z_max, r, g, b, id, viewport);
+        }
+        public void SetCameraPosition(double pos_x, double pos_y, double pos_z, double up_x, double up_y, double up_z, int viewport = 0)
+        {
+            Invoke.visualizer_setCameraPosition(_ptr, pos_x, pos_y, pos_z, up_x, up_y, up_z, viewport);
+        }
+        public void SetCameraPosition(double pos_x, double pos_y, double pos_z, double view_x, double view_y, double view_z, double up_x, double up_y, double up_z, int viewport = 0)
+        {
+            Invoke.visualizer_setCameraPositionWithView(_ptr, pos_x, pos_y, pos_z, view_x, view_y, view_z, up_x, up_y, up_z, viewport);
         }
 
         public void Spin()

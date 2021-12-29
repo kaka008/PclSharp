@@ -10,8 +10,8 @@ using namespace pcl;
 using namespace std;
 
 typedef BilateralFilter<PointXYZ> filter_t;
-typedef boost::shared_ptr<PointCloud<PointXYZ>> boost_cloud;
-typedef typename boost::shared_ptr<pcl::search::Search<pcl::PointXYZ>> KdTreePtr;
+typedef std::shared_ptr<PointCloud<PointXYZ>> std_cloud;
+typedef typename std::shared_ptr<pcl::search::Search<pcl::PointXYZ>> KdTreePtr;
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,11 +35,11 @@ EXPORT(void) filters_bilateralFilter_xyz_filter(BilateralFilter<PointXYZ>* ptr, 
 
 EXPORT(void) filters_bilateralFilter_xyz_setInputCloud(BilateralFilter<PointXYZ>* ptr, PointCloud<PointXYZ>* cloud)
 {
-	ptr->setInputCloud(boost_cloud(boost_cloud(), cloud));
+	ptr->setInputCloud(std_cloud(std_cloud(), cloud));
 }
 EXPORT(void) filters_bilateralFilter_xyz_setIndices(BilateralFilter<PointXYZ>* ptr, vector<int>* indices)
 {
-	ptr->setIndices(boost::shared_ptr<vector<int>>(boost::shared_ptr<vector<int>>(), indices));
+	ptr->setIndices(std::shared_ptr<vector<int>>(std::shared_ptr<vector<int>>(), indices));
 }
 /*EXPORT(double) filters_bilateralFilter_xyz_computePointWeight(BilateralFilter<PointXYZ>* ptr, const int &pid,const vector<int> &indices,const vector<float> &distance)
 {

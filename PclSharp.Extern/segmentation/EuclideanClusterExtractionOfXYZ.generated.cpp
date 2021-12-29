@@ -8,9 +8,9 @@
 using namespace pcl;
 using namespace std;
 
-typedef boost::shared_ptr<PointCloud<PointXYZ>> boost_cloud;
-typedef boost::shared_ptr<pcl::search::Search<PointXYZ>> search_ptr;
-typedef boost::shared_ptr<vector<int>> boost_indices;
+typedef std::shared_ptr<PointCloud<PointXYZ>> std_cloud;
+typedef std::shared_ptr<pcl::search::Search<PointXYZ>> search_ptr;
+typedef std::shared_ptr<vector<int>> std_indices;
 
 #ifdef __cplusplus
 extern "C" {
@@ -29,11 +29,11 @@ EXPORT(void) segmentation_euclideanclusterextraction_xyz_delete(EuclideanCluster
 
 EXPORT(void) segmentation_euclideanclusterextraction_xyz_setInputCloud(EuclideanClusterExtraction<PointXYZ>* ptr, PointCloud<PointXYZ>* cloud)
 {
-	ptr->setInputCloud(boost_cloud(boost_cloud(), cloud));
+	ptr->setInputCloud(std_cloud(std_cloud(), cloud));
 }
 
 EXPORT(void) segmentation_euclideanclusterextraction_xyz_setIndices(EuclideanClusterExtraction<PointXYZ>* ptr, std::vector<int>* indices)
-{ ptr->setIndices(boost_indices(boost_indices(), indices)); }
+{ ptr->setIndices(std_indices(std_indices(), indices)); }
 
 EXPORT(void) segmentation_euclideanclusterextraction_xyz_setSearchMethod(EuclideanClusterExtraction<PointXYZ>* ptr, pcl::search::Search<PointXYZ>* search)
 {

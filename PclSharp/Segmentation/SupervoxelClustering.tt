@@ -162,9 +162,9 @@ namespace PclSharp.Segmentation
 using namespace pcl;
 using namespace std;
 
-typedef boost::shared_ptr<PointCloud<<#=cppin#>>> boost_cloud;
-typedef boost::shared_ptr<PointCloud<Normal>> normal_cloud;
-typedef boost::shared_ptr<vector<int>> boost_indices;
+typedef std::shared_ptr<PointCloud<<#=cppin#>>> std_cloud;
+typedef std::shared_ptr<PointCloud<Normal>> normal_cloud;
+typedef std::shared_ptr<vector<int>> std_indices;
 
 #ifdef __cplusplus
 extern "C" {
@@ -183,11 +183,11 @@ extern "C" {
 
 <#=i.ExportI("void", "setInputCloud", "PointCloud<cppin>* cloud")#>
 {
-	ptr->setInputCloud(boost_cloud(boost_cloud(), cloud));
+	ptr->setInputCloud(std_cloud(std_cloud(), cloud));
 }
 
 <#= i.ExportI("void", "setIndices", "std::vector<int>* indices")#>
-{ ptr->setIndices(boost_indices(boost_indices(), indices)); }
+{ ptr->setIndices(std_indices(std_indices(), indices)); }
 
 <#=i.ExportI("void", "setNormalCloud", "PointCloud<Normal>* cloud")#>
 {

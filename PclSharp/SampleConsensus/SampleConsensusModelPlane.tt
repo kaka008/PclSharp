@@ -114,7 +114,7 @@ using namespace pcl;
 using namespace std;
 
 typedef <#= cppWrapper #> sac_plane;
-typedef boost::shared_ptr<PointCloud<<#=cppClass#>>> boost_cloud;
+typedef std::shared_ptr<PointCloud<<#=cppClass#>>> std_cloud;
 
 #ifdef __cplusplus  
 extern "C" {  // only need to export C interface if  
@@ -124,9 +124,9 @@ extern "C" {  // only need to export C interface if
 <#= i.Export("cppWrapper*", "ctor_indices", "PointCloud<cppClass>* cloud, vector<int>* indices, bool random") #>
 {
 	if (indices)
-		return new <#=cppWrapper#>(boost_cloud(boost_cloud(), cloud), *indices, random);
+		return new <#=cppWrapper#>(std_cloud(std_cloud(), cloud), *indices, random);
 	else
-		return new <#=cppWrapper#>(boost_cloud(boost_cloud(), cloud), random);
+		return new <#=cppWrapper#>(std_cloud(std_cloud(), cloud), random);
 }
 
 <#=i.Export("void", "delete", "cppWrapper** ptr")#>
@@ -139,7 +139,7 @@ extern "C" {  // only need to export C interface if
 { ptr->setIndices(*indices); }
 
 <#=i.ExportI("void", "setInputCloud", "PointCloud<cppClass>* cloud")#>
-{ ptr->setInputCloud(boost_cloud(boost_cloud(), cloud)); }
+{ ptr->setInputCloud(std_cloud(std_cloud(), cloud)); }
 
 <#=i.ExportI("void", "selectWithinDistance", "Eigen::VectorXf* modelCoefficients, double distance, vector<int>* inliers")#>
 { ptr-> selectWithinDistance(*modelCoefficients, distance, *inliers); }

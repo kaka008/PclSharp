@@ -10,7 +10,7 @@ using namespace pcl;
 using namespace std;
 
 typedef GridMinimum<PointXYZ> filter_t;
-typedef boost::shared_ptr<PointCloud<PointXYZ>> boost_cloud;
+typedef std::shared_ptr<PointCloud<PointXYZ>> std_cloud;
 
 #ifdef __cplusplus
 extern "C" {
@@ -34,12 +34,12 @@ EXPORT(void) filters_gridMinimum_xyz_filter(GridMinimum<PointXYZ>* ptr, PointClo
 
 EXPORT(void) filters_gridMinimum_xyz_setInputCloud(GridMinimum<PointXYZ>* ptr, PointCloud<PointXYZ>* cloud)
 {
-	ptr->setInputCloud(boost_cloud(boost_cloud(), cloud));
+	ptr->setInputCloud(std_cloud(std_cloud(), cloud));
 }
 
 EXPORT(void) filters_gridMinimum_xyz_setIndices(GridMinimum<PointXYZ>* ptr, vector<int>* indices)
 {
-	ptr->setIndices(boost::shared_ptr<vector<int>>(boost::shared_ptr<vector<int>>(), indices));
+	ptr->setIndices(std::shared_ptr<vector<int>>(std::shared_ptr<vector<int>>(), indices));
 }
 
 EXPORT(void) filters_gridMinimum_xyz_setResolution(GridMinimum<PointXYZ>* ptr, float value)

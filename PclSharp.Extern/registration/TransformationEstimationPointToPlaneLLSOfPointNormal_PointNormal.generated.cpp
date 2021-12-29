@@ -8,8 +8,8 @@ using namespace pcl;
 using namespace pcl::registration;
 using namespace std;
 
-typedef boost::shared_ptr<PointCloud<PointNormal>> boost_src;
-typedef boost::shared_ptr<vector<int>> boost_indices;
+typedef std::shared_ptr<PointCloud<PointNormal>> std_src;
+typedef std::shared_ptr<vector<int>> std_indices;
 typedef Eigen::Matrix<float, 4, 4> Matrix4;
 typedef TransformationEstimationPointToPlaneLLS<PointNormal, PointNormal> classType;
 

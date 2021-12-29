@@ -10,7 +10,7 @@ using namespace pcl;
 using namespace std;
 
 typedef RadiusOutlierRemoval<PointXYZ> filter_t;
-typedef boost::shared_ptr<PointCloud<PointXYZ>> boost_cloud;
+typedef std::shared_ptr<PointCloud<PointXYZ>> std_cloud;
 
 #ifdef __cplusplus
 extern "C" {
@@ -34,12 +34,12 @@ EXPORT(void) filters_radiusOutlierRemoval_xyz_filter(RadiusOutlierRemoval<PointX
 
 EXPORT(void) filters_radiusOutlierRemoval_xyz_setInputCloud(RadiusOutlierRemoval<PointXYZ>* ptr, PointCloud<PointXYZ>* cloud)
 {
-	ptr->setInputCloud(boost_cloud(boost_cloud(), cloud));
+	ptr->setInputCloud(std_cloud(std_cloud(), cloud));
 }
 
 EXPORT(void) filters_radiusOutlierRemoval_xyz_setIndices(RadiusOutlierRemoval<PointXYZ>* ptr, vector<int>* indices)
 {
-	ptr->setIndices(boost::shared_ptr<vector<int>>(boost::shared_ptr<vector<int>>(), indices));
+	ptr->setIndices(std::shared_ptr<vector<int>>(std::shared_ptr<vector<int>>(), indices));
 }
 
 EXPORT(void) filters_radiusOutlierRemoval_xyz_setRadiusSearch(RadiusOutlierRemoval<PointXYZ>* ptr, double value)

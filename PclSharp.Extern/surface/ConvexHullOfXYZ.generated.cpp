@@ -9,8 +9,8 @@
 using namespace pcl;
 using namespace std;
 
-typedef boost::shared_ptr<PointCloud<PointXYZ>> boost_cloud;
-typedef boost::shared_ptr<pcl::search::Search<PointXYZ>> search_ptr;
+typedef std::shared_ptr<PointCloud<PointXYZ>> std_cloud;
+typedef std::shared_ptr<pcl::search::Search<PointXYZ>> search_ptr;
 
 #ifdef __cplusplus
 extern "C" {
@@ -28,10 +28,10 @@ EXPORT(void) surface_convexhull_xyz_delete(ConvexHull<PointXYZ>** ptr)
 }
 
 EXPORT(void) surface_convexhull_xyz_setInputCloud(ConvexHull<PointXYZ>* ptr, PointCloud<PointXYZ>* cloud)
-{ ptr->setInputCloud(boost_cloud(boost_cloud(), cloud)); }
+{ ptr->setInputCloud(std_cloud(std_cloud(), cloud)); }
 
 EXPORT(void) surface_convexhull_xyz_setIndices(ConvexHull<PointXYZ>* ptr, vector<int>* indices)
-{ ptr->setIndices(boost::shared_ptr<vector<int>>(boost::shared_ptr<vector<int>>(), indices)); }
+{ ptr->setIndices(std::shared_ptr<vector<int>>(std::shared_ptr<vector<int>>(), indices)); }
 
 EXPORT(void) surface_convexhull_xyz_setSearchMethod(ConvexHull<PointXYZ>* ptr, pcl::search::Search<PointXYZ>* search)
 { ptr->setSearchMethod(search_ptr(search_ptr(), search)); }

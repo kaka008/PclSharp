@@ -87,7 +87,7 @@ using namespace std;
 
 typedef pcl::<#=cppin#> <#=cppin#>;
 typedef <#=cppWrapper#> search_t;
-typedef boost::shared_ptr<pcl::PointCloud<<#=cppin#>>> boost_cloud;
+typedef std::shared_ptr<pcl::PointCloud<<#=cppin#>>> std_cloud;
 
 #ifdef __cplusplus
 extern "C" {
@@ -106,7 +106,7 @@ extern "C" {
 
 <#=i.ExportI("void", "setInputCloud", "pcl::PointCloud<cppin>* cloud")#>
 {
-	ptr->setInputCloud(boost_cloud(boost_cloud(), cloud));
+	ptr->setInputCloud(std_cloud(std_cloud(), cloud));
 }
 
 <#=i.ExportP("SortedResults", "int")#>

@@ -127,9 +127,9 @@ using namespace pcl;
 using namespace std;
 
 typedef <#=cppWrapper#> cpp_wrapper;
-typedef boost::shared_ptr<PointCloud<<#=cppin#>>> boost_cloud;
-typedef boost::shared_ptr<PointCloud<<#=cppout#>>> boost_norms;
-typedef boost::shared_ptr<vector<int>> boost_indices;
+typedef std::shared_ptr<PointCloud<<#=cppin#>>> std_cloud;
+typedef std::shared_ptr<PointCloud<<#=cppout#>>> std_norms;
+typedef std::shared_ptr<vector<int>> std_indices;
 
 #ifdef __cplusplus
 extern "C" {
@@ -147,16 +147,16 @@ extern "C" {
 }
 
 <#= i.ExportI("void", "setInputCloud", "PointCloud<cppin>* cloud")#>
-{ ptr->setInputCloud(boost_cloud(boost_cloud(), cloud)); }
+{ ptr->setInputCloud(std_cloud(std_cloud(), cloud)); }
 
 <#= i.ExportI("void", "setIndices", "std::vector<int>* indices")#>
-{ ptr->setIndices(boost_indices(boost_indices(), indices)); }
+{ ptr->setIndices(std_indices(std_indices(), indices)); }
 
 <#= i.ExportI("void", "compute", "PointCloud<FPFHSignature33>* cloud")#>
 { ptr->compute(*cloud); }
 
 <#= i.ExportI("void", "setInputNormals", "PointCloud<cppout>* normals")#>
-{ ptr->setInputNormals(boost_norms(boost_norms(), normals)); }
+{ ptr->setInputNormals(std_norms(std_norms(), normals)); }
 
 <#=i.ExportP("KSearch", "int")#>
 <#=i.ExportP("RadiusSearch", "double")#>

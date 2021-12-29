@@ -11,7 +11,7 @@ using namespace std;
 
 typedef pcl::PointXYZ PointXYZ;
 typedef OrganizedNeighbor<PointXYZ> search_t;
-typedef boost::shared_ptr<pcl::PointCloud<PointXYZ>> boost_cloud;
+typedef std::shared_ptr<pcl::PointCloud<PointXYZ>> std_cloud;
 
 #ifdef __cplusplus
 extern "C" {
@@ -30,7 +30,7 @@ EXPORT(void) search_organizedNeighbor_xyz_delete(search_t** ptr)
 
 EXPORT(void) search_organizedNeighbor_xyz_setInputCloud(OrganizedNeighbor<PointXYZ>* ptr, pcl::PointCloud<PointXYZ>* cloud)
 {
-	ptr->setInputCloud(boost_cloud(boost_cloud(), cloud));
+	ptr->setInputCloud(std_cloud(std_cloud(), cloud));
 }
 
 EXPORT(void) search_organizedNeighbor_xyz_setSortedResults(OrganizedNeighbor<PointXYZ>* ptr, int value)

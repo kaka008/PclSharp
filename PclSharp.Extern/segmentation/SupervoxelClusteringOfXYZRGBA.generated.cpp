@@ -8,9 +8,9 @@
 using namespace pcl;
 using namespace std;
 
-typedef boost::shared_ptr<PointCloud<PointXYZRGBA>> boost_cloud;
-typedef boost::shared_ptr<PointCloud<Normal>> normal_cloud;
-typedef boost::shared_ptr<vector<int>> boost_indices;
+typedef std::shared_ptr<PointCloud<PointXYZRGBA>> std_cloud;
+typedef std::shared_ptr<PointCloud<Normal>> normal_cloud;
+typedef std::shared_ptr<vector<int>> std_indices;
 
 #ifdef __cplusplus
 extern "C" {
@@ -29,11 +29,11 @@ EXPORT(void) segmentation_supervoxelclustering_xyzrgba_delete(SupervoxelClusteri
 
 EXPORT(void) segmentation_supervoxelclustering_xyzrgba_setInputCloud(SupervoxelClustering<PointXYZRGBA>* ptr, PointCloud<PointXYZRGBA>* cloud)
 {
-	ptr->setInputCloud(boost_cloud(boost_cloud(), cloud));
+	ptr->setInputCloud(std_cloud(std_cloud(), cloud));
 }
 
 EXPORT(void) segmentation_supervoxelclustering_xyzrgba_setIndices(SupervoxelClustering<PointXYZRGBA>* ptr, std::vector<int>* indices)
-{ ptr->setIndices(boost_indices(boost_indices(), indices)); }
+{ ptr->setIndices(std_indices(std_indices(), indices)); }
 
 EXPORT(void) segmentation_supervoxelclustering_xyzrgba_setNormalCloud(SupervoxelClustering<PointXYZRGBA>* ptr, PointCloud<Normal>* cloud)
 {

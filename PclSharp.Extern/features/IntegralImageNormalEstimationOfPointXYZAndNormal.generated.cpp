@@ -10,8 +10,8 @@ using namespace pcl;
 using namespace std;
 
 typedef IntegralImageNormalEstimation<PointXYZ, Normal> integral_image;
-typedef boost::shared_ptr<PointCloud<PointXYZ>> boost_cloud;
-typedef boost::shared_ptr<vector<int>> boost_indices;
+typedef std::shared_ptr<PointCloud<PointXYZ>> std_cloud;
+typedef std::shared_ptr<vector<int>> std_indices;
 
 #ifdef __cplusplus  
 extern "C" {  // only need to export C interface if  
@@ -51,10 +51,10 @@ EXPORT(void) features_integralImageNormalEstimation_pointxyzandnormal_setNormalS
 }
 
 EXPORT(void) features_integralImageNormalEstimation_pointxyzandnormal_setInputCloud(IntegralImageNormalEstimation<PointXYZ, Normal>* ptr, PointCloud<PointXYZ>* cloud)
-{ ptr->setInputCloud(boost_cloud(boost_cloud(), cloud)); }
+{ ptr->setInputCloud(std_cloud(std_cloud(), cloud)); }
 
 EXPORT(void) features_integralImageNormalEstimation_pointxyzandnormal_setIndices(IntegralImageNormalEstimation<PointXYZ, Normal>* ptr, std::vector<int>* indices)
-{ ptr->setIndices(boost_indices(boost_indices(), indices)); }
+{ ptr->setIndices(std_indices(std_indices(), indices)); }
 
 EXPORT(void) features_integralImageNormalEstimation_pointxyzandnormal_compute(IntegralImageNormalEstimation<PointXYZ, Normal>* ptr, PointCloud<Normal>* cloud)
 { ptr->compute(*cloud); }

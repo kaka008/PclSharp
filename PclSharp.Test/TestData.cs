@@ -10,6 +10,6 @@ namespace PclSharp.Test
         /// <param name="path"></param>
         /// <returns></returns>
         public static string DataPath(string path)
-            => Path.Combine("..", "..", "..", "..", "data", path);
+            => Path.Combine("..", "..", "..", "..","..", "data", path);
     }
 }

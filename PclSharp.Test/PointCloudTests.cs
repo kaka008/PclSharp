@@ -128,8 +128,10 @@ namespace PclSharp.Test
         public void TestDownsample()
         {
             using (var reader = new PCDReader())
-                reader.Read(DataPath("tutorials/table_scene_mug_stereo_textured.pcd"), cloud);
-
+            {
+                string pathStr = DataPath("tutorials/table_scene_mug_stereo_textured.pcd");              
+                reader.Read(pathStr, cloud);
+            }
             using (var down = new PointCloudOfXYZ())
             {
                 cloud.Downsample(2, down);

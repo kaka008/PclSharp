@@ -17,12 +17,14 @@ namespace VisTest
     {
         static void Main(string[] args)
         {
+            var reader1 = new PCDReader();
             using (var cloud = new PointCloudOfXYZ())
             {
                 //using (var reader = new PCDReader())
                 //    reader.Read(@"E:\other\PclSharp\data\tutorials\table_scene_mug_stereo_textured.pcd", cloud);
                 using (var reader = new PCDReader())
                     reader.Read(@"C:\Users\l4420\Desktop\myply.pcd", cloud);
+                
                 //writerTest(cloud);
                 //PassThroughFilterTest(cloud);
                 //RadiusOutlierRemovalFilterTest(cloud);
@@ -30,7 +32,8 @@ namespace VisTest
                 //GridMinimumFilterTest(cloud);
                 //LocalMaximumFilterTest(cloud);
                 //MedianFilterTest(cloud);
-                TransformTest(cloud);
+                //TransformTest(cloud);
+                show(cloud);
             }
         }
         /// <summary>
@@ -115,8 +118,6 @@ namespace VisTest
                 Console.WriteLine($"处理后点云数量:{cloudFiltered.Points.Count}");
                 show(cloudFiltered);
             }
-
-
         }
 
         private static void GridMinimumFilterTest(PointCloudOfXYZ cloud)
@@ -205,14 +206,15 @@ namespace VisTest
                 visualizer.SetPointCloudRenderingProperties(RenderingProperties.PointSize, 2);
                 visualizer.SetPointCloudRenderingProperties(RenderingProperties.Opacity, 1);
                 visualizer.SetBackgroundColor(0, 0, 55);
-                // visualizer.AddCoordinateSystem();
-                visualizer.AddText3D("test",new PclSharp.Struct.PointXYZ(),1,1,1,1,"1");
-                PclSharp.Struct.PointXYZ po = new PclSharp.Struct.PointXYZ();
-                po.X = 0;
-                po.Y = 0;
-                po.Z = 0;
-                //visualizer.AddSphere(po,5);
-                visualizer.AddCube(0,2,0,3,0,5);
+                //// visualizer.AddCoordinateSystem();
+                //visualizer.AddText3D("test",new PclSharp.Struct.PointXYZ(),1,1,1,1,"1");
+                //PclSharp.Struct.PointXYZ po = new PclSharp.Struct.PointXYZ();
+                //po.X = 0;
+                //po.Y = 0;
+                //po.Z = 0;
+                ////visualizer.AddSphere(po,5);
+                //visualizer.AddCube(0,2,0,3,0,5);
+                //visualizer.SetCameraPosition(0, 0, 0, 0, 0, 1);
                 while (!visualizer.WasStopped)
                     visualizer.SpinOnce(100);
             }
@@ -226,13 +228,14 @@ namespace VisTest
                 visualizer.SetPointCloudRenderingProperties(RenderingProperties.Opacity, 1);
                 visualizer.SetBackgroundColor(0, 0, 55);
                 visualizer.AddCoordinateSystem();
-                visualizer.AddText3D("test001", new PclSharp.Struct.PointXYZ(), 1, 1, 1, 1, "2");
-                PclSharp.Struct.PointXYZ po = new PclSharp.Struct.PointXYZ();
-                po.X = 0;
-                po.Y = 0;
-                po.Z = 0;
-                // visualizer.AddSphere(po, 5);
-                visualizer.AddCube(0, 2, 0, 3, 0, 5);
+                //visualizer.AddText3D("test001", new PclSharp.Struct.PointXYZ(), 1, 1, 1, 1, "2");
+                //PclSharp.Struct.PointXYZ po = new PclSharp.Struct.PointXYZ();
+                //po.X = 0;
+                //po.Y = 0;
+                //po.Z = 0;
+                //// visualizer.AddSphere(po, 5);
+                //visualizer.AddCube(0, 2, 0, 3, 0, 5);
+                //visualizer.SetCameraPosition(0,0,0,0,0,1);
                 visualizer.SpinOnce(100);
             }
         }

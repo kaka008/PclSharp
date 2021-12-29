@@ -84,7 +84,7 @@ namespace PclSharp.Segmentation
 using namespace pcl;
 using namespace std;
 
-typedef boost::shared_ptr<PointCloud<<#=cppin#>>> boost_cloud;
+typedef std::shared_ptr<PointCloud<<#=cppin#>>> std_cloud;
 typedef <#=cppWrapper#> SupervoxelClusters;
 
 #ifdef __cplusplus
