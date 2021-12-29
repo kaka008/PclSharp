@@ -213,6 +213,7 @@ namespace VisTest
                 po.Z = 0;
                 //visualizer.AddSphere(po,5);
                 visualizer.AddCube(0,2,0,3,0,5);
+                visualizer.SetCameraPosition(0, 0, 0, 0, 0, 1);
                 while (!visualizer.WasStopped)
                     visualizer.SpinOnce(100);
             }
@@ -233,6 +234,7 @@ namespace VisTest
                 po.Z = 0;
                 // visualizer.AddSphere(po, 5);
                 visualizer.AddCube(0, 2, 0, 3, 0, 5);
+                visualizer.SetCameraPosition(0,0,0,0,0,1);
                 visualizer.SpinOnce(100);
             }
         }

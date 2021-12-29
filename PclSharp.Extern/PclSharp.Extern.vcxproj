@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="export.h" />
+    <ClInclude Include="features\PointCloudMatching.hpp" />
     <ClInclude Include="filters\HeightMap2D.hpp" />
   </ItemGroup>
   <ItemGroup>
