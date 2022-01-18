@@ -34,7 +34,10 @@ EXPORT(PointCloud<PointXYZ>*) pointcloud_xyz_ctor_indices(PointCloud<PointXYZ>* 
 }
 
 EXPORT(void) pointcloud_xyz_delete(PointCloud<PointXYZ>** ptr)
-{
+{   
+	//PointCloud<PointXYZ> *tr;
+	//tr = *ptr;
+	//tr->points.clear();
 	delete *ptr;
 	*ptr = NULL;
 }

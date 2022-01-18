@@ -116,14 +116,6 @@
     <Compile Include="Features\IntegralImageNormalEstimationOfPointXYZAndNormal.generated.cs">
       <DependentUpon>IntegralImageNormalEstimation.tt</DependentUpon>
     </Compile>
-    <Compile Include="Filters\Bilateral.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Bilateral.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Filters\BilateralFilterOfXYZ.generated.cs">
-      <DependentUpon>Bilateral.tt</DependentUpon>
-    </Compile>
     <Compile Include="Filters\ExtractIndicesOfXYZ.generated.cs">
       <DependentUpon>ExtractIndices.tt</DependentUpon>
     </Compile>
@@ -471,10 +463,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IntegralImageNormalEstimation.tt</DependentUpon>
-    </Content>
-    <Content Include="Filters\Bilateral.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Bilateral.cs</LastGenOutput>
     </Content>
     <Content Include="Filters\ExtractIndices.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

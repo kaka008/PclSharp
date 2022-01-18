@@ -6,6 +6,13 @@
 #include "pcl\point_types.h"
 #include <pcl/filters/radius_outlier_removal.h>
 
+//
+//#ifndef PCL_NO_PRECOMPILE
+//#include <pcl/impl/instantiate.hpp>
+//#include <pcl/point_types.h>
+//PCL_INSTANTIATE(RadiusOutlierRemoval, PCL_POINT_TYPES)
+//#endif
+
 using namespace pcl;
 using namespace std;
 

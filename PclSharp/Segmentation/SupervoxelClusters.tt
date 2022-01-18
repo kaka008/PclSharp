@@ -6,6 +6,7 @@
 <#@ output extension=".cs" #>
 <#@include file="..\Manager.ttinclude"#>
 <#@include file="..\InvokeTemplate.ttinclude"#>
+
 <# 
 	var manager = Manager.Create(Host, GenerationEnvironment);
 	outputClass(manager, "XYZRGBA", "PointXYZRGBA", "PointXYZRGBA");

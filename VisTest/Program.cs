@@ -17,7 +17,6 @@ namespace VisTest
     {
         static void Main(string[] args)
         {
-            var reader1 = new PCDReader();
             using (var cloud = new PointCloudOfXYZ())
             {
                 //using (var reader = new PCDReader())
@@ -26,14 +25,14 @@ namespace VisTest
                     reader.Read(@"C:\Users\l4420\Desktop\myply.pcd", cloud);
                 
                 //writerTest(cloud);
-                //PassThroughFilterTest(cloud);
-                //RadiusOutlierRemovalFilterTest(cloud);
+                // PassThroughFilterTest(cloud);
+                RadiusOutlierRemovalFilterTest(cloud);
                 //FastBilateralFilterTest(cloud);
                 //GridMinimumFilterTest(cloud);
                 //LocalMaximumFilterTest(cloud);
                 //MedianFilterTest(cloud);
                 //TransformTest(cloud);
-                show(cloud);
+               // show(cloud);
             }
         }
         /// <summary>
@@ -70,19 +69,18 @@ namespace VisTest
                 filter.SetFilterLimits(0.0f,120f);
                 filter.FilterLimitsNegative = false;
                 filter.filter(cloudFiltered);
-                filter.SetInputCloud(cloudFiltered);
-                filter.SetFilterFieldName("y");
-                filter.SetFilterLimits(0.0f, 70f);
-                Console.WriteLine($"FilterFieldName:{filter.GetFilterFieldName()}");
-                filter.filter(cloudFiltered);
+                //filter.SetInputCloud(cloudFiltered);
+                //filter.SetFilterFieldName("y");
+                //filter.SetFilterLimits(0.0f, 70f);
+                //Console.WriteLine($"FilterFieldName:{filter.GetFilterFieldName()}");
+                //filter.filter(cloudFiltered);
                 float min=0, max = 0;
                 filter.GetFilterLimits(ref min,ref max);
                 Console.WriteLine($"min:{min},max:{max}");
                 Console.WriteLine($"处理后点云数量:{cloudFiltered.Points.Count}");
                 show(cloudFiltered);
-            }
-
-
+                cloudFiltered.Dispose();
+            }     
         }
         /// <summary>
         /// 按指定点云半径和数量的方法来过滤点云数据
@@ -101,6 +99,7 @@ namespace VisTest
                 filter.filter(cloudFiltered);
                 Console.WriteLine($"处理后点云数量:{cloudFiltered.Points.Count}");
                 show(cloudFiltered);
+                cloudFiltered.Dispose();
             }
         }
         //需要输入结构化后的点云
