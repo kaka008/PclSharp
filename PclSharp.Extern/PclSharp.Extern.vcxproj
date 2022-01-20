@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6A3A2E07-D32B-4B2D-86AD-BE625BFC3282}</ProjectGuid>
     <RootNamespace>Pclinvoke</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
     <ProjectName>PclSharp.Extern</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -43,6 +43,8 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>
+    </PreferredToolArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -88,9 +90,17 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(PCL_ROOT)3rdParty\VTK\include\vtk-9.0;$(PCL_ROOT)include\pcl-1.12;$(PCL_ROOT)3rdParty\Eigen\eigen3;$(PCL_ROOT)3rdParty\Boost\include\boost-1_76;C:\Program Files\OpenNI2\Include;$(PCL_ROOT)3rdParty\FLANN\include;$(PCL_ROOT)3rdParty\Qhull\include;$(PCL_ROOT)3rdParty\VTK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;__SSSE3__;__SSE2__;__SSE__;vtkIOExport_AUTOINIT=1(vtkIOExportOpenGL);vtkRenderingContext2D_AUTOINIT=1(vtkRenderingContextOpenGL);vtkRenderingCore_INCLUDE=\"$(ProjectDir)../PclSharp.Extern/vtkRenderingCore_AUTOINIT_vtkInteractionStyle_vtkRenderingFreeType_vtkRenderingOpenGL.h\";vtkRenderingVolume_AUTOINIT=1(vtkRenderingVolumeOpenGL);DISABLE_OPENNI;DISABLE_ENSENSO;DISABLE_DAVIDSDK;DISABLE_DSSDK;DISABLE_RSSDK;DISABLE_PCAP;DISABLE_PNG;CMAKE_INTDIR=\"Debug\";_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;PCL_NO_PRECOMPILE;PCL_SEGMENTATION_SUPERVOXEL_CLUSTERING_HPP_</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;BOOST_ALL_NO_LIB;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;NOMINMAX;PCL_ONLY_CORE_POINT_TYPES;__SSE4_2__;__SSE4_1__;__SSSE3__;__SSE3__;__SSE2__;__SSE__;_ENABLE_EXTENDED_ALIGNED_STORAGE;CMAKE_INTDIR="Debug";PCL_NO_PRECOMPILE;PCL_SEGMENTATION_SUPERVOXEL_CLUSTERING_HPP_;EIGEN_NO_DEBUG</PreprocessorDefinitions>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj </AdditionalOptions>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <OpenMPSupport>true</OpenMPSupport>
+      <DisableSpecificWarnings>4800;4521;4251;4275;4305;4355</DisableSpecificWarnings>
+      <EnableFiberSafeOptimizations />
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(PCL_ROOT)3rdParty\VTK\include\vtk-9.1;$(PCL_ROOT)include\pcl-1.12;$(PCL_ROOT)3rdParty\Eigen\eigen3;$(PCL_ROOT)3rdParty\Boost\include\boost-1_76;C:\Program Files\OpenNI2\Include;$(PCL_ROOT)3rdParty\FLANN\include;$(PCL_ROOT)3rdParty\Qhull\include;$(PCL_ROOT)3rdParty\VTK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

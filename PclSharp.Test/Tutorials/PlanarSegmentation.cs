@@ -25,17 +25,17 @@ namespace PclSharp.Test
             {
                 cloud.Width = 15;
                 cloud.Height = 1;
-                cloud.Points.Resize(cloud.Width * cloud.Height);
+                cloud.Resize(cloud.Width * cloud.Height);
 
-                for(var i = 0; i < cloud.Points.Count; i++)
+                for (var i = 0; i < cloud.Points.Count; i++)
                 {
                     (cloud.Data + i)->X = 1024 * rand();
                     (cloud.Data + i)->Y = 1024 * rand();
                     (cloud.Data + i)->Z = 1;
                 }
 
-                //set a few outliers
-                (cloud.Data + 0)->Z = 2f;
+               // set a few outliers
+                (cloud.Data +0)->Z = 2f;
                 (cloud.Data + 3)->Z = -2f;
                 (cloud.Data + 6)->Z = 4f;
 
@@ -62,6 +62,8 @@ namespace PclSharp.Test
 
                     Console.WriteLine($"Model inliers: {inliers.Indices.Count}");
                 }
+                cloud.Points.Clear();
+                cloud.Points.Dispose();
             }
         }
 

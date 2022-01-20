@@ -1,7 +1,11 @@
 ﻿using PclSharp;
 using PclSharp.Common;
+using PclSharp.Features;
 using PclSharp.Filters;
 using PclSharp.IO;
+using PclSharp.SampleConsensus;
+using PclSharp.Segmentation;
+using PclSharp.Std;
 using PclSharp.Vis;
 using System;
 using System.Collections.Generic;
@@ -17,23 +21,31 @@ namespace VisTest
     {
         static void Main(string[] args)
         {
+
             using (var cloud = new PointCloudOfXYZ())
             {
-                //using (var reader = new PCDReader())
-                //    reader.Read(@"E:\other\PclSharp\data\tutorials\table_scene_mug_stereo_textured.pcd", cloud);
                 using (var reader = new PCDReader())
-                    reader.Read(@"C:\Users\l4420\Desktop\myply.pcd", cloud);
-                
+                    reader.Read(@"E:\other\PclSharp\data\tutorials\region_growing_rgb_tutorial.pcd", cloud);
+                //using (var reader = new PCDReader())
+                //    reader.Read(@"C:\Users\l4420\Desktop\myply.pcd", cloud);
+
                 //writerTest(cloud);
-                // PassThroughFilterTest(cloud);
-                RadiusOutlierRemovalFilterTest(cloud);
-                //FastBilateralFilterTest(cloud);
+                //PassThroughFilterTest(cloud);
+                //RadiusOutlierRemovalFilterTest(cloud);
+                FastBilateralFilterTest(cloud);
                 //GridMinimumFilterTest(cloud);
                 //LocalMaximumFilterTest(cloud);
-                //MedianFilterTest(cloud);
+                MedianFilterTest(cloud);
                 //TransformTest(cloud);
-               // show(cloud);
+                //// show(cloud);
+                //TestIntegralFile();
+
+
             }
+            //TestSupervoxelClustering();
+
+           // PlanarSegmentationTutorialTest();
+
         }
         /// <summary>
         /// 测试写文件
@@ -61,12 +73,12 @@ namespace VisTest
         {
             using (var filter = new PassThroughOfXYZ())
             {
-                Console.WriteLine($"原始点云数量:{cloud.Points.Count}" );
+                Console.WriteLine($"原始点云数量:{cloud.Points.Count}");
                 PointCloudOfXYZ cloudFiltered = new PointCloudOfXYZ();
                 filter.SetInputCloud(cloud);
                 filter.SetFilterFieldName("x");
                 Console.WriteLine($"FilterFieldName:{filter.GetFilterFieldName()}");
-                filter.SetFilterLimits(0.0f,120f);
+                filter.SetFilterLimits(0.0f, 120f);
                 filter.FilterLimitsNegative = false;
                 filter.filter(cloudFiltered);
                 //filter.SetInputCloud(cloudFiltered);
@@ -74,13 +86,13 @@ namespace VisTest
                 //filter.SetFilterLimits(0.0f, 70f);
                 //Console.WriteLine($"FilterFieldName:{filter.GetFilterFieldName()}");
                 //filter.filter(cloudFiltered);
-                float min=0, max = 0;
-                filter.GetFilterLimits(ref min,ref max);
+                float min = 0, max = 0;
+                filter.GetFilterLimits(ref min, ref max);
                 Console.WriteLine($"min:{min},max:{max}");
                 Console.WriteLine($"处理后点云数量:{cloudFiltered.Points.Count}");
                 show(cloudFiltered);
                 cloudFiltered.Dispose();
-            }     
+            }
         }
         /// <summary>
         /// 按指定点云半径和数量的方法来过滤点云数据
@@ -88,10 +100,10 @@ namespace VisTest
         /// <param name="cloud"></param>
         private static void RadiusOutlierRemovalFilterTest(PointCloudOfXYZ cloud)
         {
-            
+
             using (var filter = new RadiusOutlierRemovalOfXYZ())
             {
-                Console.WriteLine($"原始点云数量:{cloud.Points.Count}" );
+                Console.WriteLine($"原始点云数量:{cloud.Points.Count}");
                 PointCloudOfXYZ cloudFiltered = new PointCloudOfXYZ();
                 filter.SetInputCloud(cloud);
                 filter.MinNeighborsInRadius = 2;
@@ -109,7 +121,7 @@ namespace VisTest
             {
                 Console.WriteLine($"原始点云数量:{cloud.Points.Count}");
                 PointCloudOfXYZ cloudFiltered = new PointCloudOfXYZ();
-                
+
                 filter.SetInputCloud(cloud);
                 filter.SigmaS = 20.0f;
                 filter.SigmaR = 0.8f;
@@ -132,8 +144,6 @@ namespace VisTest
                 Console.WriteLine($"处理后点云数量:{cloudFiltered.Points.Count}");
                 show(cloudFiltered);
             }
-
-
         }
 
         private static void LocalMaximumFilterTest(PointCloudOfXYZ cloud)
@@ -149,8 +159,6 @@ namespace VisTest
                 Console.WriteLine($"处理后点云数量:{cloudFiltered.Points.Count}");
                 show(cloudFiltered);
             }
-
-
         }
         private static void MedianFilterTest(PointCloudOfXYZ cloud)
         {
@@ -158,20 +166,19 @@ namespace VisTest
             {
                 Console.WriteLine($"原始点云数量:{cloud.Points.Count}");
                 PointCloudOfXYZ cloudFiltered = new PointCloudOfXYZ();
-
+                filter.WindowSize = 20;
+                filter.MaxAllowedMovement = 0.2f;
                 filter.SetInputCloud(cloud);
                 filter.filter(cloudFiltered);
                 Console.WriteLine($"处理后点云数量:{cloudFiltered.Points.Count}");
                 show(cloudFiltered);
             }
-
-
         }
         private static void TransformTest(PointCloudOfXYZ cloud)
         {
             showOnce(cloud);
             PointCloudOfXYZ cloudTransformed = new PointCloudOfXYZ();
-            
+
             PclSharp.Eigen.Matrix4f mtx = new PclSharp.Eigen.Matrix4f();
             mtx[0, 0] = 0.0f;
             mtx[0, 1] = -1.0f;
@@ -193,7 +200,7 @@ namespace VisTest
             mtx[3, 2] = 0.0f;
             mtx[3, 3] = 1.0f;
 
-            Transforms.TransformPointCloud(cloud,ref cloudTransformed, mtx);
+            Transforms.TransformPointCloud(cloud, ref cloudTransformed, mtx);
             show(cloudTransformed);
         }
 
@@ -239,7 +246,95 @@ namespace VisTest
             }
         }
 
+        public static void TestIntegralFile()
+        {
+            //copying integral image tutorial from http://pointclouds.org/documentation/tutorials/normal_estimation_using_integral_images.php#normal-estimation-using-integral-images
+            using (var cloud = new PointCloudOfXYZ())
+            using (var normals = new PointCloudOfNormal())
+            using (var ne = new IntegralImageNormalEstimationPointXYZAndNormal())
+            {
+                using (var reader = new PCDReader())
+                    if (reader.Read("E:/other/pcl/test/milk_cartoon_all_small_clorox.pcd", cloud) < 0)
+                    {
+                        return;
+                    }
+
+                ne.SetNormalEstimationMethod(IntegralImageNormalEstimation.NormalEstimationMethod.Average3DGradient);
+                ne.SetMaxDepthChangeFactor(0.02f);
+                ne.SetNormalSmoothingSize(10f);
+                ne.SetInputCloud(cloud);
+                ne.Compute(normals);
+            }
+        }
+
+        private static void TestSupervoxelClustering()
+        {
+            using (var cloud = new PointCloudOfXYZ())
+            using (var super = new SupervoxelClusteringOfXYZ(0.008f, 0.1f))
+            using (var supervoxel_clusters = new PclSharp.Segmentation.SupervoxelClustersOfXYZ())
+            {
+                using (var reader = new PCDReader())
+                    if (reader.Read(DataPath("tutorials\\table_scene_mug_stereo_textured.pcd"), cloud) < 0)
+                    {
+                        return;
+                    }
+                super.SetInputCloud(cloud);
+                super.ColorImportance = 0.2f;
+                super.SpatialImportance = 0.4f;
+                super.NormalImportance = 1.0f;
+                super.Extract(supervoxel_clusters);
+
+            }
+        }
+
+
+        public unsafe static void PlanarSegmentationTutorialTest()
+        {
+            VectorOfXYZ points = new VectorOfXYZ();
+            points.Resize(20);
+
+            points.Dispose();
+
+
+
+
+            using (var cloud = new PointCloudOfXYZ(15,1))
+            {
+                for (var i = 0; i < cloud.Points.Count; i++)
+                {
+                    (cloud.Data + i)->X = 1024 * rand();
+                    (cloud.Data + i)->Y = 1024 * rand();
+                    (cloud.Data + i)->Z = 1;
+                }
+
+                //// set a few outliers
+                // (cloud.Data +0)->Z = 2f;
+                // (cloud.Data + 3)->Z = -2f;
+                // (cloud.Data + 6)->Z = 4f;
+
+                // using (var seg = new SACSegmentationOfXYZ())
+                // using (var inliers = new PointIndices())
+                // using (var coefficients = new ModelCoefficients())
+                // {
+                //     seg.OptimizeCoefficients = true;
+                //     seg.ModelType = SACModel.Plane;
+                //     seg.MethodType = SACMethod.RANSAC;
+                //     seg.DistanceThreshold = 0.01;
+
+                //     seg.SetInputCloud(cloud);
+                //     seg.Segment(inliers, coefficients);
+
+                //     Console.WriteLine($"Model inliers: {inliers.Indices.Count}");
+                // }
+                cloud.Resize(20);
+            }
+        }
+
         public static string DataPath(string path)
             => Path.Combine(@"E:\other\PclSharp\", "data", path);
+        private static Random _r = new Random();
+
+        private static float rand()
+            => (float)_r.NextDouble();
     }
 }

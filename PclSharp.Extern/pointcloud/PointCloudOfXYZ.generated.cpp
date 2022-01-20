@@ -34,10 +34,7 @@ EXPORT(PointCloud<PointXYZ>*) pointcloud_xyz_ctor_indices(PointCloud<PointXYZ>* 
 }
 
 EXPORT(void) pointcloud_xyz_delete(PointCloud<PointXYZ>** ptr)
-{   
-	//PointCloud<PointXYZ> *tr;
-	//tr = *ptr;
-	//tr->points.clear();
+{
 	delete *ptr;
 	*ptr = NULL;
 }
@@ -53,6 +50,10 @@ EXPORT(void) pointcloud_xyz_add(PointCloud<PointXYZ>* ptr, PointXYZ* value)
 	PointXYZ deref;
 	memcpy(&deref, value, sizeof(PointXYZ));
 	ptr->push_back(deref);
+}
+EXPORT(void) pointcloud_xyz_resize(PointCloud<PointXYZ>* ptr, uint32_t size)
+{
+	ptr->resize(size);
 }
 
 EXPORT(size_t) pointcloud_xyz_size(PointCloud<PointXYZ>* ptr)

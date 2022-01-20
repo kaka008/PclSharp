@@ -25,6 +25,8 @@ namespace PclSharp
 		[DllImport(Native.DllName, CallingConvention=Native.CallingConvention)]
 		public static extern void pointcloud_normal_clear(IntPtr ptr);
 		[DllImport(Native.DllName, CallingConvention=Native.CallingConvention)]
+		public static extern void pointcloud_normal_resize(IntPtr ptr, Int32 size);
+		[DllImport(Native.DllName, CallingConvention=Native.CallingConvention)]
 		public static extern unsafe void pointcloud_normal_add(IntPtr ptr, Normal* value);
 		[DllImport(Native.DllName, CallingConvention=Native.CallingConvention)]
 		public static extern void pointcloud_normal_downsample(IntPtr ptr, int factor, IntPtr output);
@@ -75,8 +77,9 @@ namespace PclSharp
 		public int Size => Count;
 		public override bool IsOrganized => Invoke.pointcloud_normal_isOrganized(_ptr);
 		public Normal* Data => (Normal*)Invoke.pointcloud_normal_data(_ptr);
-
+		//此对象的Resize方法不可用，暂未找到解决办法(如果使用，会导致资源释放时报错问题)，替代方案为调用本类的Resize方法
 		private VectorOfNormal _points;
+		//此对象的Resize方法不可用，暂未找到解决办法(如果使用，会导致资源释放时报错问题)，替代方案为调用本类的Resize方法
 		public override Vector<Normal> Points => _points;
 
 		private PointCloudOfNormal(IntPtr ptr)
@@ -114,6 +117,8 @@ namespace PclSharp
 
 		public override void Add(Normal value)
 			=> Invoke.pointcloud_normal_add(_ptr, &value);
+        public override void Resize(Int32 size)
+			=> Invoke.pointcloud_normal_resize(_ptr, size);
 
 		protected override void DisposeObject()
 		{

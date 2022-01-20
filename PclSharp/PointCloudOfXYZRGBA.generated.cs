@@ -25,6 +25,8 @@ namespace PclSharp
 		[DllImport(Native.DllName, CallingConvention=Native.CallingConvention)]
 		public static extern void pointcloud_xyzrgba_clear(IntPtr ptr);
 		[DllImport(Native.DllName, CallingConvention=Native.CallingConvention)]
+		public static extern void pointcloud_xyzrgba_resize(IntPtr ptr, Int32 size);
+		[DllImport(Native.DllName, CallingConvention=Native.CallingConvention)]
 		public static extern unsafe void pointcloud_xyzrgba_add(IntPtr ptr, PointXYZRGBA* value);
 		[DllImport(Native.DllName, CallingConvention=Native.CallingConvention)]
 		public static extern void pointcloud_xyzrgba_downsample(IntPtr ptr, int factor, IntPtr output);
@@ -75,8 +77,9 @@ namespace PclSharp
 		public int Size => Count;
 		public override bool IsOrganized => Invoke.pointcloud_xyzrgba_isOrganized(_ptr);
 		public PointXYZRGBA* Data => (PointXYZRGBA*)Invoke.pointcloud_xyzrgba_data(_ptr);
-
+		//此对象的Resize方法不可用，暂未找到解决办法(如果使用，会导致资源释放时报错问题)，替代方案为调用本类的Resize方法
 		private VectorOfXYZRGBA _points;
+		//此对象的Resize方法不可用，暂未找到解决办法(如果使用，会导致资源释放时报错问题)，替代方案为调用本类的Resize方法
 		public override Vector<PointXYZRGBA> Points => _points;
 
 		private PointCloudOfXYZRGBA(IntPtr ptr)
@@ -114,6 +117,8 @@ namespace PclSharp
 
 		public override void Add(PointXYZRGBA value)
 			=> Invoke.pointcloud_xyzrgba_add(_ptr, &value);
+        public override void Resize(Int32 size)
+			=> Invoke.pointcloud_xyzrgba_resize(_ptr, size);
 
 		protected override void DisposeObject()
 		{

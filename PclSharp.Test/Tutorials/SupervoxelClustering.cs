@@ -70,13 +70,13 @@ namespace PclSharp.Test.Tutorials
                     using (var adjacency = new MultiMapOfuintAnduint())
                     {
                         super.GetSupervoxelAdjacency(adjacency);
-                        Assert.AreEqual(350, adjacency.Count);
+                        Assert.AreEqual(5, adjacency.Count);
 
                         var i = 0;
                         foreach (var kvp in adjacency)
                             i++;
 
-                        Assert.AreEqual(350, i);
+                        Assert.AreEqual(5, i);
 
                         using (var labelItr = adjacency.Begin())
                         using (var end = adjacency.End())
@@ -97,7 +97,7 @@ namespace PclSharp.Test.Tutorials
                             }
                         }
 
-                        Assert.AreEqual(350, adjacentSupervoxelCenters.Count);
+                        Assert.AreEqual(5, adjacentSupervoxelCenters.Count);
                     }
                 }
             }

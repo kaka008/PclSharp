@@ -47,6 +47,7 @@ namespace PclSharp
 		//methods
 		<#= i.FuncI("unsafe csClass*", "at_colrow", "int col, int row") #>
 		<#= i.FuncI("clear") #>
+		<#= i.FuncI("void","resize","Int32 size") #>
 		<#= i.FuncI("unsafe void", "add", "csClass* value") #>
 		<#= i.FuncI("void", "downsample", "int factor, IntPtr output")#>
 		//properties
@@ -84,8 +85,9 @@ namespace PclSharp
 		public int Size => Count;
 		public override bool IsOrganized => <#=i.InvokeI("isOrganized")#>;
 		public <#=csClass#>* Data => (<#=csClass#>*)<#=i.InvokeI("data")#>;
-
+		//此对象的Resize方法不可用，暂未找到解决办法(如果使用，会导致资源释放时报错问题)，替代方案为调用本类的Resize方法
 		private VectorOf<#=ClassName#> _points;
+		//此对象的Resize方法不可用，暂未找到解决办法(如果使用，会导致资源释放时报错问题)，替代方案为调用本类的Resize方法
 		public override Vector<<#=csClass#>> Points => _points;
 
 		private PointCloudOf<#=ClassName#>(IntPtr ptr)
@@ -123,6 +125,8 @@ namespace PclSharp
 
 		public override void Add(<#=csClass#> value)
 			=> <#=i.InvokeI("add", "&value")#>;
+        public override void Resize(Int32 size)
+			=> <#=i.InvokeI("resize", "size")#>;
 
 		protected override void DisposeObject()
 		{
@@ -188,6 +192,10 @@ extern "C" {  // only need to export C interface if
 	<#=cppClass#> deref;
 	memcpy(&deref, value, sizeof(<#=cppClass#>));
 	ptr->push_back(deref);
+}
+<#=i.ExportI("void", "resize", "uint32_t size")#>
+{
+	ptr->resize(size);
 }
 
 <#=i.ExportI("size_t", "size", "")#>

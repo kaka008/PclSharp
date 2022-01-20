@@ -15,6 +15,7 @@ namespace PclSharp
 
         public abstract ref PointT At(int col, int row);
         public abstract void Add(PointT value);
+        public abstract void Resize(Int32 size);
     }
 
     public static class PointCloudExtensions

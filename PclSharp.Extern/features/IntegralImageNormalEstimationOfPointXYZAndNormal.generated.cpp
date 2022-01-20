@@ -50,7 +50,7 @@ EXPORT(void) features_integralImageNormalEstimation_pointxyzandnormal_setNormalS
 	ptr->setNormalSmoothingSize(size);
 }
 
-EXPORT(void) features_integralImageNormalEstimation_pointxyzandnormal_setInputCloud(IntegralImageNormalEstimation<PointXYZ, Normal>* ptr, PointCloud<PointXYZ>* cloud)
+EXPORT(void) features_integralImageNormalEstimation_pointxyzandnormal_setInputCloud(IntegralImageNormalEstimation<PointXYZ, Normal>* ptr,PointCloud<PointXYZ>* cloud)
 { ptr->setInputCloud(std_cloud(std_cloud(), cloud)); }
 
 EXPORT(void) features_integralImageNormalEstimation_pointxyzandnormal_setIndices(IntegralImageNormalEstimation<PointXYZ, Normal>* ptr, std::vector<int>* indices)

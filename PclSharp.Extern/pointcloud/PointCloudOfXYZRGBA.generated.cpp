@@ -51,6 +51,10 @@ EXPORT(void) pointcloud_xyzrgba_add(PointCloud<PointXYZRGBA>* ptr, PointXYZRGBA*
 	memcpy(&deref, value, sizeof(PointXYZRGBA));
 	ptr->push_back(deref);
 }
+EXPORT(void) pointcloud_xyzrgba_resize(PointCloud<PointXYZRGBA>* ptr, uint32_t size)
+{
+	ptr->resize(size);
+}
 
 EXPORT(size_t) pointcloud_xyzrgba_size(PointCloud<PointXYZRGBA>* ptr)
 {

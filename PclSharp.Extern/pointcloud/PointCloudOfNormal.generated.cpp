@@ -51,6 +51,10 @@ EXPORT(void) pointcloud_normal_add(PointCloud<Normal>* ptr, Normal* value)
 	memcpy(&deref, value, sizeof(Normal));
 	ptr->push_back(deref);
 }
+EXPORT(void) pointcloud_normal_resize(PointCloud<Normal>* ptr, uint32_t size)
+{
+	ptr->resize(size);
+}
 
 EXPORT(size_t) pointcloud_normal_size(PointCloud<Normal>* ptr)
 {

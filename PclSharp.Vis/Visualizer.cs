@@ -104,7 +104,7 @@ namespace PclSharp.Vis
         {
             Invoke.visualizer_setCameraPositionWithView(_ptr, pos_x, pos_y, pos_z, view_x, view_y, view_z, up_x, up_y, up_z, viewport);
         }
-
+        
         public void Spin()
             => Invoke.visualizer_spin(_ptr);
 
